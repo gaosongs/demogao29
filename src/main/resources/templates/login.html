@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入JQuery文件-->
+    <script type="text/javascript" src="/js/j.js"></script>
+    <!--声明js代码域-->
+    <script type="text/javascript">
+        /************完成用户的异步登录****************************/
+        $(function () {
+            //给登录按钮增加单击事件
+            $("#btn").click(function () {
+                //异步提交表单
+                $.post("/userController/userLogin",$("#fm").serialize(),function (data) {
+                    if(data){
+                        alert("登录成功");
+                        //跳转主页面
+                        window.location.href="main";
+                    }else{
+                        alert("登录失败");
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<h3>欢迎访问登录页面</h3>
+<hr>
+<form method="post" id="fm">
+    用户名: <input type="text" name="uname" value=""><br>
+    密码: <input type="password" name="pwd" value=""><br>
+    记住我: <input type="checkbox" name="chk" value="true"><br>
+    <input type="button" id="btn" value="登录">
+</form>
+</body>
+</html>
